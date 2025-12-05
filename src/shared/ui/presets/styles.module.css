@@ -1,0 +1,17 @@
+.button {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--mantine-color-gray-6);
+  border-radius: var(--mantine-radius-md);
+  background-color: transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: var(--mantine-color-gray-4);
+  transform: scale(1.02);
+}

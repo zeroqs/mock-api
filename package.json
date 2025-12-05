@@ -1,0 +1,41 @@
+{
+  "name": "qa-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "next dev",
+    "lint": "eslint \"src/**/*.{js,mjs,cjs,ts,mts,jsx,tsx}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" ",
+    "build": "next build",
+    "prod": "next start"
+  },
+  "dependencies": {
+    "@mantine/core": "^8.3.9",
+    "@mantine/form": "^8.3.9",
+    "@mantine/hooks": "^8.3.9",
+    "@mantine/modals": "^8.3.9",
+    "@mantine/notifications": "^8.3.9",
+    "@prisma/adapter-better-sqlite3": "^7.0.1",
+    "@prisma/client": "^7.0.1",
+    "@tabler/icons-react": "^3.35.0",
+    "dotenv": "^17.2.3",
+    "mantine-form-zod-resolver": "^1.2.0",
+    "next": "16.0.4",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20.19.25",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@zeroqs/eslint": "^1.2.6",
+    "@zeroqs/prettier": "^2.0.0",
+    "postcss": "^8.5.6",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
+    "prisma": "^7.0.1",
+    "typescript": "^5"
+  }
+}
