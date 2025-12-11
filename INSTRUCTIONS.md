@@ -11,8 +11,7 @@ npm ci
 ### 2. Настройка базы данных
 
 ```bash
-npx prisma migrate deploy
-npx prisma generate
+npx drizzle-kit push --config=drizzle-prod.config.ts
 ```
 
 ### 3. Сборка и запуск
@@ -33,8 +32,7 @@ npm run prod
 
 ```bash
 npm ci
-npx prisma generate
-npx prisma migrate deploy
+npx drizzle-kit push --config=drizzle-prod.config.ts
 npm run build
 ```
 
