@@ -15,7 +15,7 @@ import { IconCheck, IconCopy, IconEdit, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
 import { use } from 'react';
 
-import type { MockEndpointWithPresets } from '@/shared/lib/prisma';
+import type { MockEndpointWithPresets } from '@/shared/lib/endpoints';
 
 import { deleteEndpoints } from '@/shared/lib/endpoints';
 

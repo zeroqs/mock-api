@@ -1,0 +1,260 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "6",
+  "dialect": "sqlite",
+  "tables": {
+    "_prisma_migrations": {
+      "name": "_prisma_migrations",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "checksum": {
+          "autoincrement": false,
+          "name": "checksum",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "finished_at": {
+          "autoincrement": false,
+          "name": "finished_at",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "migration_name": {
+          "autoincrement": false,
+          "name": "migration_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "logs": {
+          "autoincrement": false,
+          "name": "logs",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rolled_back_at": {
+          "autoincrement": false,
+          "name": "rolled_back_at",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "started_at": {
+          "default": "(current_timestamp)",
+          "autoincrement": false,
+          "name": "started_at",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "applied_steps_count": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "applied_steps_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "MockEndpoint": {
+      "name": "MockEndpoint",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "method": {
+          "autoincrement": false,
+          "name": "method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "autoincrement": false,
+          "name": "path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "autoincrement": false,
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "default": "(CURRENT_TIMESTAMP)",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updatedAt": {
+          "autoincrement": false,
+          "name": "updatedAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "MockEndpoint_method_path_key": {
+          "name": "MockEndpoint_method_path_key",
+          "columns": [
+            "method",
+            "path"
+          ],
+          "isUnique": true
+        },
+        "MockEndpoint_method_path_idx": {
+          "name": "MockEndpoint_method_path_idx",
+          "columns": [
+            "method",
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "MockPreset": {
+      "name": "MockPreset",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "enabled": {
+          "default": false,
+          "autoincrement": false,
+          "name": "enabled",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "statusCode": {
+          "default": 200,
+          "autoincrement": false,
+          "name": "statusCode",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "responseData": {
+          "autoincrement": false,
+          "name": "responseData",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "filterKeys": {
+          "default": "([])",
+          "autoincrement": false,
+          "name": "filterKeys",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mockEndpointId": {
+          "autoincrement": false,
+          "name": "mockEndpointId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "default": "(CURRENT_TIMESTAMP)",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updatedAt": {
+          "autoincrement": false,
+          "name": "updatedAt",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {
+        "MockPreset_mockEndpointId_enabled_idx": {
+          "name": "MockPreset_mockEndpointId_enabled_idx",
+          "columns": [
+            "mockEndpointId",
+            "enabled"
+          ],
+          "isUnique": false
+        },
+        "MockPreset_mockEndpointId_idx": {
+          "name": "MockPreset_mockEndpointId_idx",
+          "columns": [
+            "mockEndpointId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "MockPreset_mockEndpointId_MockEndpoint_id_fk": {
+          "name": "MockPreset_mockEndpointId_MockEndpoint_id_fk",
+          "tableFrom": "MockPreset",
+          "tableTo": "MockEndpoint",
+          "columnsFrom": [
+            "mockEndpointId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

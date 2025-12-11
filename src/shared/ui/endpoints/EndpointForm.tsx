@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import type { HttpMethod } from '@/app/api/endpoints/schema';
-import type { MockEndpointWithPresets } from '@/shared/lib/prisma';
+import type { MockEndpointWithPresets } from '@/shared/lib/endpoints';
 
 import { METHODS, updateEndpointSchema } from '@/app/api/endpoints/schema';
 import { updateEndpoint } from '@/shared/lib/endpoints';

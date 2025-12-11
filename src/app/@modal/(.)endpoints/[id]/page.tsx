@@ -17,4 +17,3 @@ export default async function EditEndpointModalPage({
 
   return <EditEndpointModal endpoint={endpoint} />;
 }
-

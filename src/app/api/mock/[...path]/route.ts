@@ -1,8 +1,9 @@
-import type { JsonValue } from '@prisma/client/runtime/client';
+import { eq, and } from 'drizzle-orm';
 
 import type { HttpMethod } from '@/app/api/endpoints/schema';
 
-import { prisma } from '@/shared/lib/prisma';
+import { db } from '@/drizzle/db';
+import { mockEndpoint, mockPreset } from '@/drizzle/migrations/schema';
 
 export async function GET(request: Request, { params }: { params: Promise<{ path: string[] }> }) {
   return handleRequest(request, await params, 'GET');
@@ -47,19 +48,12 @@ async function handleRequest(
   const url = new URL(request.url);
   const queryParams = Object.fromEntries(url.searchParams.entries());
 
-  const endpoint = await prisma.mockEndpoint.findUnique({
-    where: {
-      method_path: {
-        method: method as HttpMethod,
-        path
-      }
-    },
-    include: {
-      presets: {
-        where: {
-          enabled: true
-        },
-        take: 1
+  const endpoint = await db.query.mockEndpoint.findFirst({
+    where: and(eq(mockEndpoint.method, method as HttpMethod), eq(mockEndpoint.path, path)),
+    with: {
+      mockPresets: {
+        where: eq(mockPreset.enabled, '1'),
+        limit: 1
       }
     }
   });
@@ -74,7 +68,7 @@ async function handleRequest(
     );
   }
 
-  if (!endpoint.presets || endpoint.presets.length === 0) {
+  if (!endpoint.mockPresets || endpoint.mockPresets.length === 0) {
     return Response.json(
       {
         error: 'No active preset',
@@ -84,14 +78,23 @@ async function handleRequest(
     );
   }
 
-  const activePreset = endpoint.presets[0];
+  const activePreset = endpoint.mockPresets[0];
   const statusCode = activePreset.statusCode;
-  let responseData = activePreset.responseData;
 
-  const filterKeys = (activePreset.filterKeys as string[] | null) ?? [];
+  let responseData: unknown =
+    typeof activePreset.responseData === 'string'
+      ? JSON.parse(activePreset.responseData)
+      : activePreset.responseData;
+
+  const filterKeys: string[] =
+    typeof activePreset.filterKeys === 'string'
+      ? JSON.parse(activePreset.filterKeys)
+      : activePreset.filterKeys
+        ? JSON.parse(String(activePreset.filterKeys))
+        : [];
 
   if (filterKeys.length > 0 && Object.keys(queryParams).length > 0) {
-    responseData = filterResponseData(responseData, filterKeys, queryParams) as JsonValue;
+    responseData = filterResponseData(responseData, filterKeys, queryParams);
   }
 
   return Response.json(responseData, { status: statusCode });

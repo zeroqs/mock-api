@@ -3,7 +3,7 @@
 import { Modal } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
-import type { MockEndpointWithPresets } from '@/shared/lib/prisma';
+import type { MockEndpointWithPresets } from '@/shared/lib/endpoints';
 
 import { usePresets } from '@/shared/ui';
 
